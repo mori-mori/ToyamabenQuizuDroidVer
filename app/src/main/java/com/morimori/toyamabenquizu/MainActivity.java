@@ -20,6 +20,9 @@ public class MainActivity extends Activity implements View.OnClickListener
 	@Override
 	public void onClick(View v)
 	{
+		QuestionDataManager.sharedInstance.loadQuestion(this, "toyamaben.csv");
+
+
 
 	}
 }
