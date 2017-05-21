@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/tatsunori/Projects/AndroidProjects/ToyamabenQuizu2/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="dc5e545ac4b3e2b081c96e1ce9306f06c7cc7d63">
+        <dex dex="/Users/tatsunori/Projects/AndroidProjects/ToyamabenQuizu2/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_fee4ef3bc31a2b7019350f2fcc84f829a26a2755/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/tatsunori/Projects/AndroidProjects/ToyamabenQuizu2/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/Users/tatsunori/Projects/AndroidProjects/ToyamabenQuizu2/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_53667bf7fa36433a8dd23bbe8afe1afcb348c562/classes.dex" />
+    </item>
+
+</items>
