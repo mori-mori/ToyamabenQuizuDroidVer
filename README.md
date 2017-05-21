@@ -1,0 +1,2 @@
+# ToyamabenQuizuDroidVer
+富山弁クイズのアンドロイドバージョン
