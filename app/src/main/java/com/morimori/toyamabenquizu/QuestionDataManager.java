@@ -17,7 +17,6 @@ import java.util.StringTokenizer;
 
  class QuestionData
 {
-
 	// 問題文
 	String question;
 	// 例文
@@ -91,8 +90,6 @@ public class QuestionDataManager
 		// 現在の問題のインデックスを初期化
 		nowQuestionIndex = 0;
 
-
-
 		// AssetManagerの呼び出し
 		AssetManager assetManager = context.getResources().getAssets();
 		try
@@ -105,7 +102,6 @@ public class QuestionDataManager
 
 			while ((line = bufferReader.readLine()) != null)
 			{
-
 				// 各行が","で区切られていて5つの項目
 				StringTokenizer st = new StringTokenizer(line, ",");
 				String first = st.nextToken();
@@ -133,6 +129,5 @@ public class QuestionDataManager
 			//e.printStackTrace();
 //			((TextView)findViewById(R.id.contentsTextView)).setText("読み込みに失敗しました・・・");
 		}
-
 	}
 }

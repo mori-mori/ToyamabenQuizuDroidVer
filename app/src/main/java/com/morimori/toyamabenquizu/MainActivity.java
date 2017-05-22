@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.content.Intent;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
@@ -22,7 +23,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 	{
 		QuestionDataManager.sharedInstance.loadQuestion(this, "toyamaben.csv");
 
-
-
+		Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+		startActivity(intent);
 	}
 }
