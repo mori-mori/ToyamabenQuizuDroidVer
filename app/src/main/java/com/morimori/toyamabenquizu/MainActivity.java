@@ -23,7 +23,13 @@ public class MainActivity extends Activity implements View.OnClickListener
 	{
 		QuestionDataManager.sharedInstance.loadQuestion(this, "toyamaben.csv");
 
+
+		// 問題文のセット
+		QuestionDat questionData = QuestionDataManager.sharedInstance.nextQuestion();
+
+
 		Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+		intent.putExtra("Question", questionData);
 		startActivity(intent);
 	}
 }

@@ -9,13 +9,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+import java.util.Random;
+import java.io.Serializable;
 /**
  * Created by tatsunori on 2017/05/21.
  */
 
 
- class QuestionData
+ class QuestionDat implements Serializable
 {
 	// 問題文
 	String question;
@@ -40,7 +41,7 @@ import java.util.StringTokenizer;
 	Integer questionNo = 0;
 
 	// クラスが生成された時の処理
-	QuestionData(String[] questionSourceDataArray)
+	public QuestionDat(String[] questionSourceDataArray)
 	{
 		question = questionSourceDataArray[0];
 		questionExample = questionSourceDataArray[1];
@@ -75,7 +76,7 @@ public class QuestionDataManager
 	static  QuestionDataManager sharedInstance = new QuestionDataManager();
 
 	// 問題を格納するための配列
-	ArrayList<QuestionData> questionDataArray = new ArrayList<QuestionData>();
+	ArrayList<QuestionDat> questionDataArray = new ArrayList<QuestionDat>();
 
 	// 現在の問題のインデックス
 	Integer nowQuestionIndex = 0;
@@ -113,7 +114,7 @@ public class QuestionDataManager
 				String seventh = st.nextToken();
 
 				// 問題データを格納するオブジェクトを作成
-				QuestionData questionData = new QuestionData(new String[] {first, second, third, fourth, fifth, sixth, seventh});
+				QuestionDat questionData = new QuestionDat(new String[] {first, second, third, fourth, fifth, sixth, seventh});
 
 				// 問題を追加
 				questionDataArray.add(questionData);
@@ -129,5 +130,19 @@ public class QuestionDataManager
 			//e.printStackTrace();
 //			((TextView)findViewById(R.id.contentsTextView)).setText("読み込みに失敗しました・・・");
 		}
+	}
+
+	public QuestionDat nextQuestion()
+	{
+		if (nowQuestionIndex < 10)
+		{
+			Random r = new Random();
+
+			QuestionDat nextQuestion = questionDataArray.get(r.nextInt(questionDataArray.size()));
+			nowQuestionIndex += 1;
+
+			return nextQuestion;
+		}
+		return null;
 	}
 }
