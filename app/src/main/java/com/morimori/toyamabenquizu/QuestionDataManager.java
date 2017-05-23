@@ -53,7 +53,7 @@ import java.io.Serializable;
 	}
 
 	// ユーザが選択した答えが正解かどうか判定する
-	private boolean isCorrect()
+	public boolean isCorrect()
 	{
 		// 答えが一致しているかどうか判定する
 		if (correctAnswerNumber == userChoiceAnswerNumber)

@@ -2,13 +2,14 @@ package com.morimori.toyamabenquizu;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
 import org.w3c.dom.Text;
 
-public class QuestionActivity extends Activity
+public class QuestionActivity extends Activity implements View.OnClickListener
 {
 	QuestionDat questionData;
 	TextView questionTxt;
@@ -54,5 +55,77 @@ public class QuestionActivity extends Activity
 		answer4Button.setText(" 4 " + questionData.answer4);
 
 
+		answer1Button = (Button)findViewById(R.id.answer1Button);
+		findViewById(R.id.answer1Button).setOnClickListener(this);
+
+		answer2Button = (Button)findViewById(R.id.answer2Button);
+		answer2Button.setOnClickListener(this);
+
+		answer3Button = (Button)findViewById(R.id.answer3Button);
+		answer3Button.setOnClickListener(this);
+
+		answer4Button = (Button)findViewById(R.id.answer4Button);
+		answer4Button.setOnClickListener(this);
+
+
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId())
+		{
+			case R.id.answer1Button:
+				questionData.userChoiceAnswerNumber = 1;
+
+				break;
+
+			case R.id.answer2Button:
+				questionData.userChoiceAnswerNumber = 2;
+				// ○○○
+				// ...
+				break;
+
+			case R.id.answer3Button:
+				questionData.userChoiceAnswerNumber = 3;
+				// ...
+				// ○○○
+				break;
+			case R.id.answer4Button:
+				questionData.userChoiceAnswerNumber = 4;
+				// ...
+				// ○○○
+				break;
+		}
+	}
+
+	private void goNextQuestionWithAnimation()
+	{
+		if (questionData.isCorrect())
+		{
+
+		}
+		else
+		{
+
+		}
+	}
+
+	private void goNextQuestionWithCorrectAnimation()
+	{
+
+	}
+
+	private void goNextQuestion()
+	{
+
+		if (QuestionDataManager.sharedInstance.nextQuestion() != null)
+		{
+
+		}
+		else
+		{
+
+		}
 	}
 }
