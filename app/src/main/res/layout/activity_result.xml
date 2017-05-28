@@ -7,4 +7,27 @@
     android:layout_height="match_parent"
     tools:context="com.morimori.toyamabenquizu.ResultActivity">
 
+    <TextView
+        android:id="@+id/correctPercentLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="正解率は100%"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="50dp"
+        android:text="ホームへ"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correctPercentLabel"/>
 </android.support.constraint.ConstraintLayout>

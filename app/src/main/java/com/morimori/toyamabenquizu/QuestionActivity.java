@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
-import org.w3c.dom.Text;
-
 public class QuestionActivity extends Activity implements View.OnClickListener
 {
 	QuestionDat questionData;
@@ -78,23 +76,36 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 			case R.id.answer1Button:
 				questionData.userChoiceAnswerNumber = 1;
 
+				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
+				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
+
+				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.answer2Button:
 				questionData.userChoiceAnswerNumber = 2;
-				// ○○○
-				// ...
+
+				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
+				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
+
+				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.answer3Button:
 				questionData.userChoiceAnswerNumber = 3;
-				// ...
-				// ○○○
+
+				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
+				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
+
+				goNextQuestionWithAnimation();
 				break;
 			case R.id.answer4Button:
 				questionData.userChoiceAnswerNumber = 4;
-				// ...
-				// ○○○
+
+				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
+				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
+
+				goNextQuestionWithAnimation();
 				break;
 		}
 	}
@@ -103,29 +114,38 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 	{
 		if (questionData.isCorrect())
 		{
-
+			goNextQuestionWithCorrectAnimation();
 		}
 		else
 		{
-
+			goNextQuestionWithIncorrectAnimation();
 		}
 	}
 
 	private void goNextQuestionWithCorrectAnimation()
 	{
+		goNextQuestion();
+	}
 
+
+	private void goNextQuestionWithIncorrectAnimation()
+	{
+		goNextQuestion();
 	}
 
 	private void goNextQuestion()
 	{
-
-		if (QuestionDataManager.sharedInstance.nextQuestion() != null)
+		QuestionDat nextQuestion = QuestionDataManager.sharedInstance.nextQuestion();
+		if (nextQuestion != null)
 		{
-
+			Intent intent = new Intent(QuestionActivity.this, QuestionActivity.class);
+			intent.putExtra("Question", nextQuestion);
+			startActivity(intent);
 		}
 		else
 		{
-
+			Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+			startActivity(intent);
 		}
 	}
 }

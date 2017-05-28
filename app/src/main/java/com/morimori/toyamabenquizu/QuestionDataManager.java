@@ -32,13 +32,13 @@ import java.io.Serializable;
 	// 選択肢4
 	String answer4;
 	// 正解の番号
-	Integer correctAnswerNumber;
+	int correctAnswerNumber;
 
 	// ユーザが選択した選択肢の番号
-	Integer userChoiceAnswerNumber;
+	int userChoiceAnswerNumber;
 
 	// 問題の番号
-	Integer questionNo = 0;
+	int questionNo = 0;
 
 	// クラスが生成された時の処理
 	public QuestionDat(String[] questionSourceDataArray)

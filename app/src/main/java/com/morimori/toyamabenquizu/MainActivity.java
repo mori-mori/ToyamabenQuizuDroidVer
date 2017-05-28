@@ -27,9 +27,11 @@ public class MainActivity extends Activity implements View.OnClickListener
 		// 問題文のセット
 		QuestionDat questionData = QuestionDataManager.sharedInstance.nextQuestion();
 
-
 		Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
 		intent.putExtra("Question", questionData);
 		startActivity(intent);
+
+//		Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+//		startActivity(intent);
 	}
 }
