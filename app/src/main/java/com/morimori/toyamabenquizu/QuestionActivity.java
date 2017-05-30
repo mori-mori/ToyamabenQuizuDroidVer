@@ -8,8 +8,18 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.ProgressBar;
 import android.os.CountDownTimer;
+import 	android.view.animation.AlphaAnimation;
+import android.view.animation.Animation.AnimationListener;
 
-public class QuestionActivity extends Activity implements View.OnClickListener
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+import 	java.io.InputStream;
+import java.io.IOException;
+import android.view.animation.Animation;
+
+
+public class QuestionActivity extends Activity implements View.OnClickListener, AnimationListener
 {
 	QuestionDat questionData;
 	TextView questionTxt;
@@ -82,6 +92,27 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 		countDown = new CountDown(10000, 1000);
 		countDown.start();
 
+
+
+
+		ImageView correctImageView = (ImageView)findViewById(R.id.correctImageView);
+		ImageView incorrectImageView = (ImageView)findViewById(R.id.incorrectImageView);
+
+		try
+		{
+			InputStream correctStream = getResources().getAssets().open("correct.png");
+			Bitmap correctBitmap = BitmapFactory.decodeStream(correctStream);
+			correctImageView.setImageBitmap(correctBitmap);
+
+			InputStream incorrectStream = getResources().getAssets().open("incorrect.png");
+			Bitmap incorrectBitmap = BitmapFactory.decodeStream(incorrectStream);
+			incorrectImageView.setImageBitmap(incorrectBitmap);
+		}
+		catch (IOException e)
+		{
+		}
+
+
 	}
 
 	@Override
@@ -149,13 +180,63 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 
 	private void goNextQuestionWithCorrectAnimation()
 	{
-		goNextQuestion();
+//		AlphaAnimation alpha = new AlphaAnimation(
+//				0.0f,  // 開始時の透明度（0は完全に透過）
+//				1.0f); // 終了時の透明度（1は全く透過しない）
+//
+//		// 3秒かけてアニメーションする
+//		alpha.setDuration(3000);
+//
+//		// アニメーション終了時の表示状態を維持する
+//		alpha.setFillEnabled(true);
+//		alpha.setFillAfter  (true);
+		countDown.cancel();
+
+		findViewById(R.id.correctImageView).setAlpha(1.0f);
+		AlphaAnimation aa = new AlphaAnimation(0.0f, 1.0f);
+		aa.setDuration(3000);
+		aa.setFillEnabled(true);
+		aa.setFillAfter(true);
+		findViewById(R.id.correctImageView).startAnimation(aa);
+
+		aa.setAnimationListener(this);
+
+//		goNextQuestion();
 	}
 
 
 	private void goNextQuestionWithIncorrectAnimation()
 	{
-		goNextQuestion();
+		countDown.cancel();
+
+		findViewById(R.id.incorrectImageView).setAlpha(1.0f);
+		AlphaAnimation aa = new AlphaAnimation(0.0f, 1.0f);
+		aa.setDuration(3000);
+		aa.setFillEnabled(true);
+		aa.setFillAfter(true);
+		findViewById(R.id.incorrectImageView).startAnimation(aa);
+
+		aa.setAnimationListener(this);
+
+		//		AlphaAnimation alpha = new AlphaAnimation(
+//				0.0f,  // 開始時の透明度（0は完全に透過）
+//				1.0f); // 終了時の透明度（1は全く透過しない）
+//
+//		// 3秒かけてアニメーションする
+//		alpha.setDuration(3000);
+//
+//		// アニメーション終了時の表示状態を維持する
+//		alpha.setFillEnabled(true);
+//		alpha.setFillAfter  (true);
+//
+		// アニメーションを開始
+//		findViewById(R.id.incorrectImageView).startAnimation(alpha);
+//		AlphaAnimation aa = new AlphaAnimation(0, 1);
+//		aa.setDuration(3000);
+//		aa.setFillAfter(true);
+//		findViewById(R.id.incorrectImageView).startAnimation(aa);
+
+//		goNextQuestion();
 	}
 
 	private void goNextQuestion()
@@ -172,6 +253,22 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 			Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
 			startActivity(intent);
 		}
+	}
+
+	@Override
+	public void onAnimationEnd(Animation animation)
+	{
+		goNextQuestion();
+	}
+
+	@Override
+	public void onAnimationRepeat(Animation animation)
+	{
+	}
+
+	@Override
+	public void onAnimationStart(Animation animation)
+	{
 	}
 
 
@@ -209,10 +306,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener
 			String test = Long.toString(millisUntilFinished / 1000);
 			progBar = (ProgressBar)findViewById(R.id.timeProgressBar);
 			progBar.setProgress(Integer.parseInt(test));
-
-
-
 		}
 	}
-
 }
