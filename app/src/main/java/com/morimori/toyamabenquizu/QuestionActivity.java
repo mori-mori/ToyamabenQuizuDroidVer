@@ -24,13 +24,12 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 	QuestionDat questionData;
 	TextView questionTxt;
 	TextView questionExampleTextView;
-
 	Button answer1Button;      // 選択肢1ボタン
 	Button answer2Button;      // 選択肢2ボタン
-	Button answer3Button;    // 選択肢3ボタン
+	Button answer3Button;      // 選択肢3ボタン
 	Button answer4Button;      // 選択肢4ボタン
-	Button backHomeButton;
-	ProgressBar progBar;
+	Button backHomeButton;     // Top画面へ戻る
+	ProgressBar answerCountBar;
 	CountDown countDown;
 
 	@Override
@@ -82,18 +81,15 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		backHomeButton.setOnClickListener(this);
 
 
-		progBar = (ProgressBar)findViewById(R.id.timeProgressBar);
+		answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
 
 		// 最大値を設定する.
-		progBar.setMax(10);
+		answerCountBar.setMax(100);
 		// プログレスバーの値を設定する.
-		progBar.setProgress(10);
+		answerCountBar.setProgress(100);
 
-		countDown = new CountDown(10000, 1000);
+		countDown = new CountDown(10000, 100);
 		countDown.start();
-
-
-
 
 		ImageView correctImageView = (ImageView)findViewById(R.id.correctImageView);
 		ImageView incorrectImageView = (ImageView)findViewById(R.id.incorrectImageView);
@@ -111,8 +107,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		catch (IOException e)
 		{
 		}
-
-
 	}
 
 	@Override
@@ -135,7 +129,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
 				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
 
-//				progBar.setProgress(10);
 				goNextQuestionWithAnimation();
 				break;
 
@@ -145,7 +138,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
 				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
 
-//				progBar.setProgress(10);
 				goNextQuestionWithAnimation();
 				break;
 
@@ -155,7 +147,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
 				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
 
-//				progBar.setProgress(10);
 				goNextQuestionWithAnimation();
 				break;
 
@@ -180,16 +171,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 
 	private void goNextQuestionWithCorrectAnimation()
 	{
-//		AlphaAnimation alpha = new AlphaAnimation(
-//				0.0f,  // 開始時の透明度（0は完全に透過）
-//				1.0f); // 終了時の透明度（1は全く透過しない）
-//
-//		// 3秒かけてアニメーションする
-//		alpha.setDuration(3000);
-//
-//		// アニメーション終了時の表示状態を維持する
-//		alpha.setFillEnabled(true);
-//		alpha.setFillAfter  (true);
 		countDown.cancel();
 
 		findViewById(R.id.correctImageView).setAlpha(1.0f);
@@ -200,8 +181,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		findViewById(R.id.correctImageView).startAnimation(aa);
 
 		aa.setAnimationListener(this);
-
-//		goNextQuestion();
 	}
 
 
@@ -217,26 +196,6 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		findViewById(R.id.incorrectImageView).startAnimation(aa);
 
 		aa.setAnimationListener(this);
-
-		//		AlphaAnimation alpha = new AlphaAnimation(
-//				0.0f,  // 開始時の透明度（0は完全に透過）
-//				1.0f); // 終了時の透明度（1は全く透過しない）
-//
-//		// 3秒かけてアニメーションする
-//		alpha.setDuration(3000);
-//
-//		// アニメーション終了時の表示状態を維持する
-//		alpha.setFillEnabled(true);
-//		alpha.setFillAfter  (true);
-//
-		// アニメーションを開始
-//		findViewById(R.id.incorrectImageView).startAnimation(alpha);
-//		AlphaAnimation aa = new AlphaAnimation(0, 1);
-//		aa.setDuration(3000);
-//		aa.setFillAfter(true);
-//		findViewById(R.id.incorrectImageView).startAnimation(aa);
-
-//		goNextQuestion();
 	}
 
 	private void goNextQuestion()
@@ -262,16 +221,10 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 	}
 
 	@Override
-	public void onAnimationRepeat(Animation animation)
-	{
-	}
+	public void onAnimationRepeat(Animation animation) {}
 
 	@Override
-	public void onAnimationStart(Animation animation)
-	{
-	}
-
-
+	public void onAnimationStart(Animation animation) {}
 
 	class CountDown extends CountDownTimer
 	{
@@ -283,14 +236,13 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		@Override
 		public void onFinish()
 		{
-			 progBar = (ProgressBar)findViewById(R.id.timeProgressBar);
+			answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
 
 			questionData.userChoiceAnswerNumber = 99;
 
 			QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
 			QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
 
-//			progBar.setProgress(10);
 			countDown.cancel();
 
 			goNextQuestionWithAnimation();
@@ -301,11 +253,10 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		public void onTick(long millisUntilFinished)
 		{
 			questionTxt = (TextView)findViewById(R.id.questionTextView);
-//			questionTxt.setText(Long.toString(millisUntilFinished / 1000));
 
-			String test = Long.toString(millisUntilFinished / 1000);
-			progBar = (ProgressBar)findViewById(R.id.timeProgressBar);
-			progBar.setProgress(Integer.parseInt(test));
+			String test = Long.toString(millisUntilFinished / 100);
+			answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
+			answerCountBar.setProgress(Integer.parseInt(test));
 		}
 	}
 }
