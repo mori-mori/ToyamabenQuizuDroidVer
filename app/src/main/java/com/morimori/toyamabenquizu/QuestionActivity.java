@@ -10,27 +10,23 @@ import android.widget.ProgressBar;
 import android.os.CountDownTimer;
 import 	android.view.animation.AlphaAnimation;
 import android.view.animation.Animation.AnimationListener;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 import 	java.io.InputStream;
 import java.io.IOException;
 import android.view.animation.Animation;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
-
+/**
+ * 問題表示・回答画面
+ */
 public class QuestionActivity extends Activity implements View.OnClickListener, AnimationListener
 {
-	QuestionDat questionData;
-	TextView questionTxt;
-	TextView questionExampleTextView;
-	Button answer1Button;      // 選択肢1ボタン
-	Button answer2Button;      // 選択肢2ボタン
-	Button answer3Button;      // 選択肢3ボタン
-	Button answer4Button;      // 選択肢4ボタン
-	Button backHomeButton;     // Top画面へ戻る
-	ProgressBar answerCountBar;
-	CountDown countDown;
+	private QuestionDat questionData;          // 問題データ
+	private ProgressBar answerCountBar;        // 回答時間タイマー
+	private CountDown countDown;               // タイマークラス
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,56 +34,45 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_question);
 
-		// Intent を取得する
-		Intent intent = getIntent();
-		questionData = (QuestionDat)intent.getSerializableExtra("Question");
+		// 前の画面からQuestionDateオブジェクトを受け取る
+		questionData = (QuestionDat)getIntent().getSerializableExtra("Question");
 
 		((TextView)findViewById(R.id.questionNoLabel)).setText(QuestionDataManager.sharedInstance.nowQuestionIndex + "/10");
+		((TextView)findViewById(R.id.questionTextView)).setText(questionData.question);
+		((TextView)findViewById(R.id.questionExampleTextView)).setText(questionData.questionExample);
 
-		questionTxt = (TextView)findViewById(R.id.questionTextView);
-		questionTxt.setText(questionData.question);
-
-
-		questionExampleTextView = (TextView)findViewById(R.id.questionExampleTextView);
-		questionExampleTextView.setText(questionData.questionExample);
-
-
-		answer1Button = (Button)findViewById(R.id.answer1Button);
+		// answer1Button set
+		Button answer1Button = (Button)findViewById(R.id.answer1Button);
 		answer1Button.setText(" 1 " + questionData.answer1);
+		answer1Button.setOnClickListener(this);
 
-		answer2Button = (Button)findViewById(R.id.answer2Button);
+		// answer2Button set
+		Button answer2Button = (Button)findViewById(R.id.answer2Button);
 		answer2Button.setText(" 2 " + questionData.answer2);
-
-		answer3Button = (Button)findViewById(R.id.answer3Button);
-		answer3Button.setText(" 3 " + questionData.answer3);
-
-		answer4Button = (Button)findViewById(R.id.answer4Button);
-		answer4Button.setText(" 4 " + questionData.answer4);
-
-
-		answer1Button = (Button)findViewById(R.id.answer1Button);
-		findViewById(R.id.answer1Button).setOnClickListener(this);
-
-		answer2Button = (Button)findViewById(R.id.answer2Button);
 		answer2Button.setOnClickListener(this);
 
-		answer3Button = (Button)findViewById(R.id.answer3Button);
+		// answer3Button set
+		Button answer3Button = (Button)findViewById(R.id.answer3Button);
+		answer3Button.setText(" 3 " + questionData.answer3);
 		answer3Button.setOnClickListener(this);
 
-		answer4Button = (Button)findViewById(R.id.answer4Button);
+		// answer4Button set
+		Button answer4Button = (Button)findViewById(R.id.answer4Button);
+		answer4Button.setText(" 4 " + questionData.answer4);
 		answer4Button.setOnClickListener(this);
 
-		backHomeButton = (Button)findViewById(R.id.backHomeButton);
+		// backHomeButton set
+		Button backHomeButton = (Button)findViewById(R.id.backHomeButton);
 		backHomeButton.setOnClickListener(this);
-
 
 		answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
 
-		// 最大値を設定する.
+		// 最大値を設定
 		answerCountBar.setMax(100);
-		// プログレスバーの値を設定する.
+		// プログレスバーの値を設定
 		answerCountBar.setProgress(100);
 
+		// タイマー作成
 		countDown = new CountDown(10000, 100);
 		countDown.start();
 
@@ -96,67 +81,73 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 
 		try
 		{
+			// 正解画像読み込み
 			InputStream correctStream = getResources().getAssets().open("correct.png");
 			Bitmap correctBitmap = BitmapFactory.decodeStream(correctStream);
 			correctImageView.setImageBitmap(correctBitmap);
 
+			// 不正解画像読み込み
 			InputStream incorrectStream = getResources().getAssets().open("incorrect.png");
 			Bitmap incorrectBitmap = BitmapFactory.decodeStream(incorrectStream);
 			incorrectImageView.setImageBitmap(incorrectBitmap);
 		}
 		catch (IOException e)
 		{
+			AlertDialog.Builder alertDlg = new AlertDialog.Builder(this);
+			alertDlg.setTitle("エラー");
+			alertDlg.setMessage("画像読み込みに失敗しました。");
+			alertDlg.setPositiveButton("OK", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
+					// OK ボタンクリック処理
+				}
+			});
+			alertDlg.create().show();
 		}
 	}
 
 	@Override
 	public void onClick(View v)
 	{
+		((Button)findViewById(R.id.answer1Button)).setEnabled(false);
+		((Button)findViewById(R.id.answer2Button)).setEnabled(false);
+		((Button)findViewById(R.id.answer3Button)).setEnabled(false);
+		((Button)findViewById(R.id.answer4Button)).setEnabled(false);
+
 		switch (v.getId())
 		{
 			case R.id.answer1Button:
 				questionData.userChoiceAnswerNumber = 1;
-
-				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
-				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
-
-				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.answer2Button:
 				questionData.userChoiceAnswerNumber = 2;
-
-				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
-				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
-
-				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.answer3Button:
 				questionData.userChoiceAnswerNumber = 3;
-
-				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
-				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
-
-				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.answer4Button:
 				questionData.userChoiceAnswerNumber = 4;
-
-				QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
-				QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
-
-				goNextQuestionWithAnimation();
 				break;
 
 			case R.id.backHomeButton:
 				Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
 				startActivity(intent);
-				break;
+				return;
 		}
+
+		QuestionDataManager.sharedInstance.questionDataArray.remove(questionData.questionNo - 1);
+		QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
+
+		goNextQuestionWithAnimation();
 	}
 
+	/**
+	 * アニメーション後、次の問題表示
+	 */
 	private void goNextQuestionWithAnimation()
 	{
 		if (questionData.isCorrect())
@@ -169,6 +160,9 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		}
 	}
 
+	/**
+	 * 正解アニメーション
+	 */
 	private void goNextQuestionWithCorrectAnimation()
 	{
 		countDown.cancel();
@@ -183,7 +177,9 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		aa.setAnimationListener(this);
 	}
 
-
+	/**
+	 * 不正解アニメーション
+	 */
 	private void goNextQuestionWithIncorrectAnimation()
 	{
 		countDown.cancel();
@@ -198,6 +194,9 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		aa.setAnimationListener(this);
 	}
 
+	/**
+	 * 次の問題表示
+	 */
 	private void goNextQuestion()
 	{
 		QuestionDat nextQuestion = QuestionDataManager.sharedInstance.nextQuestion();
@@ -226,6 +225,9 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 	@Override
 	public void onAnimationStart(Animation animation) {}
 
+	/**
+	 * タイマークラス
+	 */
 	class CountDown extends CountDownTimer
 	{
 		public CountDown(long millisInFuture, long countDownInterval)
@@ -233,6 +235,7 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 			super(millisInFuture, countDownInterval);
 		}
 
+		// インターバル終了時に呼ばれる
 		@Override
 		public void onFinish()
 		{
@@ -252,11 +255,9 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		@Override
 		public void onTick(long millisUntilFinished)
 		{
-			questionTxt = (TextView)findViewById(R.id.questionTextView);
-
-			String test = Long.toString(millisUntilFinished / 100);
+			String timer = Long.toString(millisUntilFinished / 100);
 			answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
-			answerCountBar.setProgress(Integer.parseInt(test));
+			answerCountBar.setProgress(Integer.parseInt(timer));
 		}
 	}
 }

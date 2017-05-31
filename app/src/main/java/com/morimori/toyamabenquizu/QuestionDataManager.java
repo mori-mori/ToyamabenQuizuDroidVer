@@ -1,6 +1,8 @@
 package com.morimori.toyamabenquizu;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.AssetManager;
 
 import java.io.BufferedReader;
@@ -127,8 +129,6 @@ public class QuestionDataManager
 
 		} catch (IOException e)
 		{
-			//e.printStackTrace();
-//			((TextView)findViewById(R.id.contentsTextView)).setText("読み込みに失敗しました・・・");
 		}
 	}
 
