@@ -5,124 +5,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.morimori.toyamabenquizu.QuestionActivity">
 
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="あいそんない"
-        app:layout_constraintTop_toBottomOf="@+id/questionNoLabel"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginTop="40dp"
+        android:text="あいそんない"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionNoLabel"/>
 
     <TextView
         android:id="@+id/questionNoLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1/10"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:text="1/10"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/timeProgressBar"/>
 
     <TextView
         android:id="@+id/questionExampleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="例:じーちゃんがいかれて、ほんまにあいそんないねー"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginTop="20dp"
+        android:text="例:じーちゃんがいかれて、ほんまにあいそんないねー"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView"
+        app:layout_constraintHorizontal_bias="0.535"/>
 
     <Button
         android:id="@+id/answer1Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="50dp"
-        android:text="だらしない"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionExampleTextView"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:background="@drawable/anserbutton"
+        android:text="だらしない"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/answer2Button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/answer2Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="かわいい"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer1Button"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:background="@drawable/anserbutton"
+        android:text="かわいい"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/answer3Button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/answer3Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="あいそうがない"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer2Button"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:background="@drawable/anserbutton"
+        android:text="あいそうがない"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/answer4Button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/answer4Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="わびしい"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer3Button"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:background="@drawable/anserbutton"
+        android:text="わびしい"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/backHomeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
+        android:layout_width="42dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/homebutton"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="15dp"/>
+        app:layout_constraintLeft_toRightOf="@+id/timeProgressBar"
+        android:layout_marginLeft="30dp"/>
 
     <ProgressBar
         android:id="@+id/timeProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"/>
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/correctImageView"
@@ -137,8 +160,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="216dp"/>
+        app:layout_constraintVertical_bias="0.057"/>
 
     <ImageView
         android:id="@+id/incorrectImageView"
@@ -150,9 +172,9 @@
         android:layout_marginTop="8dp"
         android:alpha="0"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="213dp"/>
+        app:layout_constraintVertical_bias="0.122"/>
 </android.support.constraint.ConstraintLayout>
