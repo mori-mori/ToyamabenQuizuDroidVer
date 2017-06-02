@@ -18,6 +18,7 @@ import java.io.IOException;
 import android.view.animation.Animation;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.KeyEvent;
 
 /**
  * 問題表示・回答画面
@@ -143,6 +144,21 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 		QuestionDataManager.sharedInstance.questionDataArray.add(questionData);
 
 		goNextQuestionWithAnimation();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
