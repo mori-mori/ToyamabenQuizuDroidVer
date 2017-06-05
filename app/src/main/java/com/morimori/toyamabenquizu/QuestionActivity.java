@@ -44,27 +44,23 @@ public class QuestionActivity extends Activity implements View.OnClickListener, 
 
 		// answer1Button set
 		Button answer1Button = (Button)findViewById(R.id.answer1Button);
-		answer1Button.setText(" 1 " + questionData.answer1);
+		answer1Button.setText("       1.    " + questionData.answer1);
 		answer1Button.setOnClickListener(this);
 
 		// answer2Button set
 		Button answer2Button = (Button)findViewById(R.id.answer2Button);
-		answer2Button.setText(" 2 " + questionData.answer2);
+		answer2Button.setText("       2.    " + questionData.answer2);
 		answer2Button.setOnClickListener(this);
 
 		// answer3Button set
 		Button answer3Button = (Button)findViewById(R.id.answer3Button);
-		answer3Button.setText(" 3 " + questionData.answer3);
+		answer3Button.setText("       3.    " + questionData.answer3);
 		answer3Button.setOnClickListener(this);
 
 		// answer4Button set
 		Button answer4Button = (Button)findViewById(R.id.answer4Button);
-		answer4Button.setText(" 4 " + questionData.answer4);
+		answer4Button.setText("       4.    " + questionData.answer4);
 		answer4Button.setOnClickListener(this);
-
-		// backHomeButton set
-		Button backHomeButton = (Button)findViewById(R.id.backHomeButton);
-		backHomeButton.setOnClickListener(this);
 
 		answerCountBar = (ProgressBar)findViewById(R.id.timeProgressBar);
 
