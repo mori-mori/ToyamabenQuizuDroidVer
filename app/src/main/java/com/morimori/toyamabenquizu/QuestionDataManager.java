@@ -1,10 +1,7 @@
 package com.morimori.toyamabenquizu;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.AssetManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,12 +10,11 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Random;
 import java.io.Serializable;
+
 /**
- * Created by tatsunori on 2017/05/21.
+ * 問題用クラス
  */
-
-
- class QuestionDat implements Serializable
+class QuestionDat implements Serializable
 {
 	// 問題文
 	String question;
@@ -68,7 +64,9 @@ import java.io.Serializable;
 	}
 }
 
-
+/**
+ * 問題用クラス管理クラス
+ */
 public class QuestionDataManager
 {
 	private Context context;
@@ -132,6 +130,10 @@ public class QuestionDataManager
 		}
 	}
 
+	/**
+	 * 次の問題を取得
+	 * @return
+	 */
 	public QuestionDat nextQuestion()
 	{
 		if (nowQuestionIndex < 10)

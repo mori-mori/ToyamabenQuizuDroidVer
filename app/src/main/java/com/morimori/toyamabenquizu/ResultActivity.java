@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.app.Activity;
 
+/**
+ * 結果表示用クラス
+ */
 public class ResultActivity extends Activity implements View.OnClickListener
 {
 	@Override
@@ -17,7 +20,6 @@ public class ResultActivity extends Activity implements View.OnClickListener
 
 		Button backButton = (Button)findViewById(R.id.backHomeButton);
 		backButton.setOnClickListener(this);
-
 
 		int questionCount = 10;
 
